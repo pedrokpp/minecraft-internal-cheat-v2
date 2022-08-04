@@ -68,4 +68,6 @@ public:
 	int get_current_item_index();
 	void set_current_item_index(int idx);
 
+	jobject raytrace(float distance);
+
 };

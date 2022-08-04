@@ -36,7 +36,7 @@ void killaura::invoke(std::shared_ptr<c_context> ctx) {
 		if (p.get_object() == nullptr)
 			continue;
 
-		if (p.get_entity_id() == ctx->local->get_entity_id())
+		if (p.get_entity_id() == ctx->local->get_entity_id() || p.get_health() <= 0)
 			continue;
 
 		double dist = sdk::calc_distance(ctx->local->get_location(), p.get_location());

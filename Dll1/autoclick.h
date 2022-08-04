@@ -7,7 +7,7 @@ namespace autoclick {
 
 	inline bool m_enabled = true;
 	inline float m_cps = 15.f;
-	inline float m_blockhit_chance = 0.8f;
+	inline float m_blockhit_chance = 0.0f;
 	inline bool m_randomize = false;
 	inline bool m_break_blocks = true;
 	inline bool m_inventory_check = false;

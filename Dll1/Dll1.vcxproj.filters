@@ -95,6 +95,9 @@
     <ClCompile Include="jhook.cpp">
       <Filter>machip\hooks</Filter>
     </ClCompile>
+    <ClCompile Include="reach.cpp">
+      <Filter>machip\cheat\modules\reach</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="sdk">
@@ -186,6 +189,9 @@
     </Filter>
     <Filter Include="machip\cheat\modules\refill">
       <UniqueIdentifier>{c4d41b63-ddad-4430-99e5-1084e59277c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="machip\cheat\modules\reach">
+      <UniqueIdentifier>{03fcd8a3-e06c-40e2-bc2e-0c4a87d033c5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +299,9 @@
     </ClInclude>
     <ClInclude Include="refill.h">
       <Filter>machip\cheat\modules\refill</Filter>
+    </ClInclude>
+    <ClInclude Include="reach.h">
+      <Filter>machip\cheat\modules\reach</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

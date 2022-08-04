@@ -433,3 +433,10 @@ void c_player::send_use_item(jobject world, jobject itemstack) {
 	machip::instance->get_env()->DeleteLocalRef(playerctrl);
 	machip::instance->get_env()->DeleteLocalRef(playerctrl_class);
 }
+
+jobject c_player::raytrace(float distance) {
+	jclass player_class = machip::instance->get_env()->GetObjectClass(player_obj);
+	jmethodID raytrace_mid = machip::instance->get_env()->GetMethodID(player_class, "a", "(DF)Lauh;");
+	machip::instance->get_env()->DeleteLocalRef(player_class);
+	return machip::instance->get_env()->CallObjectMethod(player_obj, raytrace_mid, 1.0, distance);
+}

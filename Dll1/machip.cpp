@@ -22,6 +22,7 @@
 #include "autoclick.h"
 #include "autosoup.h"
 #include "refill.h"
+#include "reach.h"
 
 
 bool machip::c_machip::attach()
@@ -77,6 +78,7 @@ void machip::c_machip::run()
 	modules::instance->create(autoclick::invoke);
 	modules::instance->create(autosoup::invoke);
 	modules::instance->create(refill::invoke);
+	modules::instance->create(reach::invoke);
 
 	modules::instance->create_reset(bunnyhop::reset);
 	modules::instance->create_reset(timer::reset);
@@ -108,8 +110,20 @@ void machip::c_machip::run()
 			bunnyhop::m_enabled = !bunnyhop::m_enabled;
 
 		if (wrapper::get_keystate(VK_INSERT)) {
-			refill::m_enabled = !refill::m_enabled;
-			wrapper::output("switch: " + std::to_string(refill::m_enabled));
+			reach::m_enabled = !reach::m_enabled;
+			wrapper::output("switch: " + std::to_string(reach::m_enabled));
+		}
+
+		if (wrapper::get_keystate(VK_F10))
+		{
+			killaura::m_enabled = !killaura::m_enabled;
+			wrapper::output("switch killaura! " + std::to_string(killaura::m_enabled));
+		}
+
+		if (wrapper::get_keystate(VK_F8))
+		{
+			chest_steal::m_enabled = !chest_steal::m_enabled;
+			wrapper::output("switch chest steal! " + std::to_string(chest_steal::m_enabled));
 		}
 
 		if (!is_running)
@@ -123,8 +137,16 @@ void machip::c_machip::run()
 		}
 
 		if (!sdk::instance->hasTick)
+		{
+			/*if (machip::instance->timer->has_passed(200))
+			{
+				machip::hooks::jhooks::rehook_tick();
+				machip::instance->timer->reset();
+			}*/
 			continue;
+		}
 
+		machip::instance->timer->reset();
 		sdk::instance->hasTick = false;
 
 		auto minecraft_inst = sdk::instance->get_minecraft();

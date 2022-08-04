@@ -14,7 +14,7 @@ void autoclick::invoke(std::shared_ptr<c_context> ctx) {
 		return;
 
 
-    if (wrapper::get_keystate(VK_LBUTTON) || (m_triggerbot && ctx->local->is_hovering_entity())) {
+    if ((wrapper::get_keystate(VK_LBUTTON) || (m_triggerbot && ctx->local->is_hovering_entity())) && GetForegroundWindow() == hMcWindow) {
         if (m_break_blocks && ctx->local->is_breaking_blocks())
         {
             SendMessage(hMcWindow, WM_LBUTTONDOWN, MK_LBUTTON, MAKELPARAM(0, 0));

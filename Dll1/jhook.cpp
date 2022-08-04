@@ -15,17 +15,30 @@ void __cdecl tickHook(void** p1, void** p2) {
     return pRunTick(p1, p2);
 }
 
-bool  machip::hooks::jhooks::apply_jtickhook() {
+void machip::hooks::jhooks::rehook_tick() {
+    wrapper::output("rehook!");
+    if (MH_DisableHook(reinterpret_cast<void**>(pRunTickTarget)) != MH_OK) {
+        wrapper::output("failed to rehook onTick hook");
+        return;
+    }
+    apply_jtickhook(false);
+}
+
+bool  machip::hooks::jhooks::apply_jtickhook(bool create) {
     jclass mc_class = machip::instance->get_env()->FindClass("ave");
     jmethodID method = machip::instance->get_env()->GetMethodID(mc_class, "s", "()V");
     pRunTickTarget = reinterpret_cast<runTick>(*(unsigned __int64*)(*(unsigned __int64*)method + 0x40));
 
-    MH_STATUS status = MH_CreateHook(reinterpret_cast<void**>(pRunTickTarget), &tickHook, reinterpret_cast<void**>(&pRunTick));
-    if (status != MH_OK) {
-        wrapper::output("failed to hook onTick");
-        wrapper::output(MH_StatusToString(status));
-        return false;
+    if (create)
+    {
+        MH_STATUS status = MH_CreateHook(reinterpret_cast<void**>(pRunTickTarget), &tickHook, reinterpret_cast<void**>(&pRunTick));
+        if (status != MH_OK) {
+            wrapper::output("failed to hook onTick");
+            wrapper::output(MH_StatusToString(status));
+            return false;
+        }
     }
+    
 
     if (MH_EnableHook(reinterpret_cast<void**>(pRunTickTarget)) != MH_OK) {
         wrapper::output("failed to enable onTick hook");
@@ -95,7 +108,7 @@ float __cdecl gtReach(void** p1, void** p2) {
 bool  machip::hooks::jhooks::apply_jreachhook() {
     jclass mc_class = machip::instance->get_env()->FindClass("bda");
     jmethodID method = machip::instance->get_env()->GetMethodID(mc_class, "d", "()F");
-    pGetReachTarget = reinterpret_cast<gtreach>(*(unsigned __int64*)(*(unsigned __int64*)method + 0x40));
+    pGetReachTarget = reinterpret_cast<gtreach>(*(unsigned __int64*)(*(unsigned __int64*)method + 0x45));
 
     MH_STATUS status = MH_CreateHook(reinterpret_cast<void**>(pGetReachTarget), &gtReach, reinterpret_cast<void**>(&pGetReach));
     if (status != MH_OK) {

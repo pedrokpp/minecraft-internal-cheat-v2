@@ -13,6 +13,8 @@ namespace machip
 		bool is_running;
 		bool is_open = false;
 
+		std::shared_ptr<c_timer> timer = std::make_shared<c_timer>();
+
 		bool attach();
 		void run();
 		void destroy();
@@ -40,7 +42,8 @@ namespace machip
 
 		namespace jhooks
 		{
-			bool apply_jtickhook();
+			bool apply_jtickhook(bool create = true);
+			void rehook_tick();
 			bool apply_moveEntityHook();
 			bool apply_jreachhook();
 		}

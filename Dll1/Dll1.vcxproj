@@ -189,6 +189,7 @@
     <ClCompile Include="nofall.cpp" />
     <ClCompile Include="noslowdown.cpp" />
     <ClCompile Include="player.cpp" />
+    <ClCompile Include="reach.cpp" />
     <ClCompile Include="refill.cpp" />
     <ClCompile Include="scaffold.cpp" />
     <ClCompile Include="swapbuffers.cpp" />
@@ -225,6 +226,7 @@
     <ClInclude Include="nofall.h" />
     <ClInclude Include="noslowdown.h" />
     <ClInclude Include="player.h" />
+    <ClInclude Include="reach.h" />
     <ClInclude Include="refill.h" />
     <ClInclude Include="scaffold.h" />
     <ClInclude Include="timer.h" />
